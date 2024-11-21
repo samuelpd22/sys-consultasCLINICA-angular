@@ -1,0 +1,188 @@
+<div class="container">
+    <!-- Cabeçalho -->
+    <header>
+        <div>
+            <img src="https://medigo-three.vercel.app/assets/icons/logo-full.svg" alt="Logo">
+        </div>
+        <button (click)="navigateToRegistrar()" style="color:rgba(255, 255, 255, 0.644)">Registrar Cliente</button>
+        <button (click)="navigateToMedico()" style="color:rgba(255, 255, 255, 0.644)">Painel Médico</button>
+        <button *ngIf="isTokenValid()" style="color:rgba(255, 255, 255, 0.644)" (click)="logout()">
+          Sair
+        </button>
+
+        
+        
+    </header>
+
+    <!-- Mensagem de boas-vindas -->
+    <br>
+    <section>
+        <h2>Bem vindo 👋</h2>
+        <p>Comece o dia gerenciando as consultas.</p>
+    </section>
+    <br>
+
+
+
+    <div class="doctor-selection">
+      <label for="doctor" class="block text-sm font-medium text-white">Filtrar Consultas:</label>
+      <select 
+        id="doctor" 
+        [(ngModel)]="medicoSelecionado" 
+        (change)="buscarClientesPorMedico()" 
+        class="mt-1 block w-1/4 p-3 bg-gray-800 text-white border-none rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      >
+        <option value="" class="text-gray-500">Todas as consultas</option>
+        <option *ngFor="let medico of medicos" [value]="medico">{{ medico }}</option>
+      </select>
+    </div>
+
+
+    
+    <!-- Cards de consultas -->
+    <div class="cards-container">
+        <div class="card">
+            <i class="fa-regular fa-calendar-days"></i>
+            <h2>{{ consultasAgendadas}}</h2> <!-- Exibe o número de clientes -->
+            <p>Consultas agendadas</p>
+        </div>
+        <div class="card">
+            <i class="fa-regular fa-hourglass"></i>
+            <h2>{{consultasPendentesMarcacao}}</h2>
+            <p>Consultas pendentes</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-exclamation-triangle icon"></i>
+            <h2>{{ consultasCanceladas }}</h2>
+            <p>Consultas canceladas</p>
+        </div>
+    </div>
+
+    <!-- Tabela de consultas -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Paciente</th>
+                    <th>Status</th>
+                    <th>Data da Consulta</th>
+                    <th>Médico</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cliente of clientesFiltrados">
+                <td>{{ cliente.id }}</td> <!-- Exibe o ID -->
+                <td>{{ cliente.nome }}
+                  <i class="fa fa-info-circle" aria-hidden="true" (click)="abrirModalDadosGerais(cliente)"></i>
+
+                </td> <!-- Exibe o nome do paciente -->
+
+                <td>
+                  <span class="status" [ngClass]="{
+                    'status-agendado': cliente.status === 'Agendado',
+                    'status-pendente': cliente.status === 'Pendente',
+                    'status-cancelado': cliente.status === 'Cancelado'
+                  }">{{ cliente.status }}</span>
+                </td>
+                <td>{{ cliente.dataConsulta | date: 'dd/MM/yyyy' }}</td> <!-- Exibe a data do agendamento -->
+                <td>{{ cliente.medico }}</td> <!-- Exibe o nome do médico -->
+            
+                <td class="actions">
+                  <ng-container *ngIf="cliente.status === 'Pendente'; else otherButtons">
+                    <!-- Exibe apenas "Agendar" se o status for "Pendente" -->
+                    <a (click)="abrirModalReagendamento(cliente)">Agendar Consulta</a>
+                  </ng-container>
+                  <ng-template #otherButtons>
+                    <!-- Exibe "Re-Agendar" e "Cancelar" se o status não for "Pendente" -->
+                    <a (click)="reagendar(cliente)">Agendar</a> |
+                    <a class="cancelar" (click)="cancelarCliente(cliente.id)">Cancelar</a>
+                  </ng-template>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <!-- Modal de Reagendamento -->
+    <div *ngIf="clienteSelecionado" class="modal">
+        <div class="modal-content">
+
+            <h3 class="header text-2xl font-bold text-white">
+                Reagendar Consulta para <span class="nome-cliente">{{ clienteSelecionado.nome }}</span>
+            </h3>
+
+          <form (ngSubmit)="salvarReagendamento()">
+            <div class="form-group">
+              <label for="dataConsulta" class="block text-sm font-medium text-white">Nova Data da Consulta:</label>
+              <input id="dataConsulta" type="date" [(ngModel)]="clienteSelecionado.dataConsulta" name="dataConsulta" required class="input-field" />
+            </div>
+      
+            <div class="form-group">
+                <label for="medico" class="block text-sm font-medium text-white">Médico</label>
+                <select
+                    id="medico"
+                    [(ngModel)]="clienteSelecionado.medico" 
+                    name="medico"
+                    class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                >
+                    <option value="">Selecione um médico</option>
+                    <option value="Dr. Orlando Azevedo">Dr. Orlando Azevedo</option> <!-- Alterado para nomes dos médicos -->
+                    <option value="Dr. Bruno">Dr. Bruno</option>
+                    <option value="Dr. Naldo Nogueira">Dr. Naldo Nogueira</option>
+                </select>
+            </div>
+      
+            <div class="flex justify-between mt-4">
+              <button type="submit" class="button">Salvar</button>
+              <button type="button" (click)="fecharModal()" class="button cancel-btn">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+
+</div>
+
+
+<!-- Modal de dados gerais do paciente -->
+<div *ngIf="modalDadosGeraisAberto" class="modal">
+  <div class="modal-content">
+    <h3 class="header text-2xl font-bold text-white">
+      <i class="icon fa fa-info-circle"></i> Dados Gerais de 
+      <span class="nome-cliente">{{ clienteSelecionado.nome }}</span>
+    </h3>
+
+    <div class="modal-details modal-details-geral">
+      <p><strong>Email:</strong> {{ clienteSelecionado.email }}</p>
+      <p><strong>Telefone:</strong> {{ clienteSelecionado.telefone }}</p>
+      <p><strong>Status:</strong> 
+        <span class="status" [ngClass]="{
+          'status-agendado': clienteSelecionado.status === 'Agendado',
+          'status-pendente': clienteSelecionado.status === 'Pendente',
+          'status-cancelado': clienteSelecionado.status === 'Cancelado'
+        }">{{ clienteSelecionado.status }}</span>
+      </p>
+      <p><strong>Data da Consulta:</strong> {{ clienteSelecionado.dataConsulta | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>Médico:</strong> {{ clienteSelecionado.medico }}</p>
+      <p><strong>Data de Nascimento:</strong> {{ clienteSelecionado.dataDeNascimento | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>Gênero:</strong> {{ clienteSelecionado.genero }}</p>
+      <p><strong>Endereço:</strong> {{ clienteSelecionado.endereco }}</p>
+      <p><strong>Profissão:</strong> {{ clienteSelecionado.profissao }}</p>
+      <p><strong>Contato de Emergência:</strong> {{ clienteSelecionado.contatoEmergencia }}</p>
+      <p><strong>Nome do Contato de Emergência:</strong> {{ clienteSelecionado.nomeContatoEmergencia }}</p>
+    </div>
+
+    <div class="flex justify-between mt-4">
+      <button type="button" (click)="fecharModalDadosGerais()" class="button">Fechar</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+

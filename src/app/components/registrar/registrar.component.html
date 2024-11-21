@@ -1,0 +1,227 @@
+<div class="formzin flex h-screen overflow-hidden">
+    <!-- Formulário à esquerda (75%) -->
+    <div class="w-3/4 flex items-center justify-center formulario p-6 overflow-y-auto">
+        <form class="space-y-6 w-full max-w-md" (ngSubmit)="salvar()">
+            <h1 class="header text-3xl font-bold text-white">Bem Vindo</h1>
+            <p class="agende-title">Nos conte mais sobre você.</p>
+            <h3 class="header text-2xl font-bold text-white">Informações Pessoais</h3>
+
+            <div class="form-group flex flex-col md:flex-row md:space-x-4">
+                <div class="cont flex-1">
+                    <label for="nome" class="block text-sm font-medium text-white">Nome completo</label>
+                        <input
+                            id="nome"
+                            type="text"
+                            autocomplete="off"
+                            placeholder="Digite seu nome completo"
+                            [(ngModel)]="clienteEdit.nome"
+                            (ngModelChange)="onNomeChange()"
+                            name="nome"
+                            class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                        />
+                        <ul *ngIf="suggestedClients.length > 0" class="suggestions-list">
+                             <li *ngFor="let client of suggestedClients" (click)="selectClient(client)">
+                             {{ client.nome }}
+                            </li>
+                        </ul>
+                </div>
+                <div class="cont flex-1">
+                    <label for="email" class="block text-sm font-medium text-white">E-mail</label>
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="Digite o seu melhor e-mail"
+                        [(ngModel)]="clienteEdit.email"
+                        name="email"
+                        class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                    />
+                </div>
+            </div>
+
+            <div class="form-group flex flex-col md:flex-row md:space-x-4">
+                <div class="cont flex-1">
+                    <label for="telefone" class="block text-sm font-medium text-white">Telefone</label>
+                    <input
+                        id="telefone"
+                        type="tel"
+                        placeholder="+55"
+                        [(ngModel)]="clienteEdit.telefone"
+                        name="telefone"
+                        class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                    />
+                </div>
+                <div class="cont flex-1">
+                    <label for="dataDeNascimento" class="block text-sm font-medium text-white">Data de nascimento</label>
+                    <input
+                        id="dataDeNascimento"
+                        type="date"
+                        [(ngModel)]="clienteEdit.dataDeNascimento"
+                        name="dataDeNascimento"
+                        class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                    />
+                </div>
+                
+            </div>
+
+            <div class="form-group">
+                <label class="block text-sm font-medium text-white">Gênero</label>
+                <div class="flex space-x-4 mt-1">
+                    <div class=" custom-radio">
+                        <input 
+                            type="radio" 
+                            id="masculino" 
+                            name="genero" 
+                            value="masculino" 
+                            [(ngModel)]="clienteEdit.genero"
+                            class="hidden" />
+                        <label for="masculino" class="custom-label">Masculino</label>
+                    </div>
+                    <div class="custom-radio">
+                        <input 
+                            type="radio" 
+                            id="feminino" 
+                            name="genero" 
+                            value="feminino" 
+                            [(ngModel)]="clienteEdit.genero"
+                            class="hidden" />
+                        <label for="feminino" class="custom-label">Feminino</label>
+                    </div>
+                    <div class="custom-radio">
+                        <input 
+                            type="radio" 
+                            id="outro" 
+                            name="genero" 
+                            value="outro" 
+                            [(ngModel)]="clienteEdit.genero"
+                            class="hidden" />
+                        <label for="outro" class="custom-label">Outro</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group flex flex-col md:flex-row md:space-x-4">
+                <div class="cont flex-1">
+                    <label for="endereco" class="block text-sm font-medium text-white">Endereço</label>
+                    <input
+                        id="endereco"
+                        type="text"
+                        placeholder="Digite seu endereço"
+                        [(ngModel)]="clienteEdit.endereco"
+                        name="endereco"
+                        class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                    />
+                </div>
+                <div class="cont flex-1">
+                    <label for="profissao" class="block text-sm font-medium text-white">Profissão</label>
+                    <input
+                        id="profissao"
+                        type="text"
+                        placeholder="Qual sua profissão ?"
+                        [(ngModel)]="clienteEdit.profissao"
+                        name="profissao"
+                        autocomplete="off"
+                        class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                    />
+                </div>
+            </div>
+
+            <div class="form-group flex flex-col md:flex-row md:space-x-4">
+                <div class="cont flex-1">
+                    <label for="contatoEmergencia" class="block text-sm font-medium text-white">Contato de Emergência</label>
+                    <input
+                        id="contatoEmergencia"
+                        type="tel"
+                        placeholder="+55"
+                        [(ngModel)]="clienteEdit.contatoEmergencia"
+                        name="contatoEmergencia"
+                        autocomplete="off"
+                        class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                    />
+                </div>
+                <div class="cont flex-1">
+                    <label for="nomeContatoEmergencia" class="block text-sm font-medium text-white">Nome do Contato de Emergência</label>
+                    <input
+                        id="nomeContatoEmergencia"
+                        type="text"
+                        placeholder="Nome do responsável"
+                        [(ngModel)]="clienteEdit.nomeContatoEmergencia"
+                        name="nomeContatoEmergencia"
+                        autocomplete="off"
+                        class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                       
+                    />
+                </div>
+            </div>
+
+            <h3 class="header text-2xl font-bold text-white">Informações médicas</h3>
+
+            <div class="form-group">
+                <label for="medico" class="block text-sm font-medium text-white">Médico</label>
+                <select
+                    id="medico"
+                    [(ngModel)]="clienteEdit.medico" 
+                    name="medico"
+                    class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                >
+                    <option value="">Selecione um médico</option>
+                    <option value="Dr. Orlando Azevedo">Dr. Orlando Azevedo</option> <!-- Alterado para nomes dos médicos -->
+                    <option value="Dr. Bruno">Dr. Bruno</option>
+                    <option value="Dr. Naldo Nogueira">Dr. Naldo Nogueira</option>
+                </select>
+            </div>
+            <div class="cont flex-1">
+                <label for="dataDeNascimento" class="block text-sm font-medium text-white">Data da Consulta</label>
+                <input
+                    id="dataDeNascimento"
+                    type="date"
+                    [(ngModel)]="clienteEdit.dataConsulta"
+                    name="dataDeNascimento"
+                    class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                />
+            </div>
+            
+            
+
+            <div class="form-group flex flex-col md:flex-row md:space-x-4">
+                <div class="form-group">
+                    <label for="medico" class="block text-sm font-medium text-white">Médico</label>
+                    <select
+                        id="medico"
+                        name="medico"
+                        class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                    >
+                        <option value="">Plano de Saúde</option>
+                        <option value="UNIMED">UNIMED</option> <!-- Alterado para nomes dos médicos -->
+                        <option value="AAPI">AAPI</option>
+                        <option value="Promed">Promed</option>
+                        <option value="FSFX">FSFX</option>
+                        <option value="SERPRAM">SERPRAM</option>
+                        <option value="ASSEFAZ">ASSEFAZ</option>
+                    </select>
+                </div>
+                <div class="cont flex-1">
+                    <label for="numeroPlanoSaude" class="block text-sm font-medium text-white">Número do plano de saúde</label>
+                    <input
+                        id="numeroPlanoSaude"
+                        type="text"
+                        placeholder="Digite o número do plano"
+                        name="numeroPlanoSaude"
+                        autocomplete="off"
+                        class="mt-1 block w-full p-2 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+                    />
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none">
+                Agendar consulta
+            </button>
+
+            
+        </form>
+    </div>
+
+    <!-- Imagem à direita (25%) -->
+    <div class="w-1/4 flex items-center justify-center bg-gray-100 fixed right-0 top-0 h-full">
+        <img src="https://medigo-three.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fregister-img.png&w=1080&q=75" alt="Descrição da imagem" class="object-cover h-full w-full" />
+    </div>
+</div>

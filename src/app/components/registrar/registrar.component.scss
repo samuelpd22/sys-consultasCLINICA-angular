@@ -1,0 +1,180 @@
+h1{
+    margin-top: 200px;
+}
+.formzin {
+    background-color: #131619;
+    color: white;
+    overflow: hidden; /* Oculta a barra de rolagem */
+
+}
+.formulario {
+    overflow-y: auto; /* Permite a rolagem vertical */
+    min-height: 400px; /* Altura mínima para garantir que o conteúdo principal fique visível */
+
+}
+.header {
+    margin-top: 200px; /* Ajuste para melhor espaçamento */
+}
+
+.formulario::-webkit-scrollbar {
+    display: none; /* Esconde a barra de rolagem */
+}
+
+input {
+    background-color: rgba(33, 33, 34, 0.801);
+    border: 1px solid rgb(51, 50, 50);
+    border-radius: 5px;
+    color: white;
+    padding: 10px 10px 10px 40px; /* Ajuste aqui para adicionar espaço à esquerda */
+    outline: none;
+}
+
+input::placeholder {
+    font-size: 0.85rem; /* Tamanho do placeholder (ajuste conforme necessário) */
+    color: rgba(255, 255, 255, 0.6); /* Cor do placeholder (ajuste conforme necessário) */
+}
+
+button {
+    background-color: #24AE7C; /* Cor de fundo do botão */
+    border: none; /* Remove a borda padrão do botão */
+    border-radius: 5px; /* Cantos arredondados */
+    color: white; /* Cor do texto no botão */
+    padding: 10px; /* Espaçamento interno */
+    cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+    transition: background-color 0.3s; /* Transição suave para mudanças de cor */
+}
+
+button:hover {
+    background-color: #1d9b66; /* Cor ao passar o mouse */
+}
+
+.agende-title {
+    color: rgba(202, 201, 201, 0.685);
+}
+
+.form-group {
+    margin-bottom: 1rem; /* Espaçamento entre os grupos de formulário */
+}
+
+@media (min-width: 768px) { /* Estilo para telas médias e maiores */
+    .form-group {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .header {
+        margin-top: 200px; /* Diminua o espaço superior */
+    }
+
+    .formulario {
+        padding-top: 150px; /* Adiciona mais espaço no topo */
+    }
+   
+}
+@media (max-width: 768px) {
+    /* Suas regras CSS aqui */
+    .formulario {
+        padding-top: 800px; /* Ajuste o padding conforme necessário */
+        padding-bottom: 400px;
+    }
+    
+    .header {
+        margin-top: 50px; /* Ajuste o margin-top para o cabeçalho */
+    }
+    .cont{
+        margin-bottom: 20px; /* Aumente o espaçamento entre os grupos de formulário */
+    }
+}
+
+.custom-radio {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.custom-radio input[type="radio"] {
+    display: none; /* Esconde o radio button padrão */
+}
+
+.custom-label {
+    cursor: pointer;
+    padding-left:29px; /* Espaço para o ícone */
+    position: relative;
+    color: white; /* Cor do texto */
+}
+
+.custom-label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px; /* Tamanho da bolinha */
+    height: 20px; /* Tamanho da bolinha */
+    border: 2px solid white; /* Cor da borda */
+    border-radius: 50%; /* Faz a bolinha redonda */
+    background-color: transparent; /* Fundo transparente */
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-radio input[type="radio"]:checked + .custom-label::before {
+    background-color: #24AE7C; /* Cor do fundo quando selecionado */
+    border-color: #24AE7C; /* Cor da borda quando selecionado */
+    content: "✔"; /* Ícone de verificação */
+    color: white; /* Cor do ícone */
+    text-align: center;
+    line-height: 25px; /* Centraliza o ícone verticalmente */
+    font-size: 18px; /* Aumenta o tamanho do ícone */
+}
+
+
+input:-webkit-autofill::first-line {
+    font-size: 0.9em; /* Ajusta o tamanho da fonte, se necessário */
+  
+}
+
+
+
+
+/* Estilo para o input */
+.cont input {
+    transition: all 0.3s ease;
+  }
+  
+  .cont input:focus {
+    border-color: #4299e1; /* Cor de foco */
+    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.4); /* Efeito de sombra */
+  }
+  
+  /* Estilo da lista de sugestões */
+  .suggestions-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #1a202c; /* Cor de fundo das sugestões */
+    border: 1px solid #4a5568; /* Borda de sugestões */
+    border-radius: 0 0 5px 5px; /* Borda arredondada */
+    max-height: 200px; /* Tamanho máximo para o container das sugestões */
+    overflow-y: auto; /* Rolagem quando ultrapassar o limite */
+    position: absolute; /* Fica sobre o input */
+    width: 20%;
+    z-index: 10; /* Garante que a lista fique acima de outros elementos */
+  }
+  
+  /* Estilo de cada item de sugestão */
+  .suggestions-list li {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.2s ease;
+  }
+  
+  /* Efeito de hover nos itens da lista */
+  .suggestions-list li:hover {
+    background-color: #2d3748; /* Cor de fundo ao passar o mouse */
+  }
+  
+  /* Quando a lista estiver vazia */
+  .suggestions-list.empty {
+    display: none;
+  }

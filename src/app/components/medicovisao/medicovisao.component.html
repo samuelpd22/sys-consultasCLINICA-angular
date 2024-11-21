@@ -1,0 +1,192 @@
+<div class="container">
+    <!-- Cabeçalho -->
+    <header>
+        <div>
+            <img src="https://medigo-three.vercel.app/assets/icons/logo-full.svg" alt="Logo">
+        </div>
+        <div>  </div>
+        <button *ngIf="isTokenValid()" style="color:rgba(255, 255, 255, 0.644)" (click)="logout()">
+            Sair
+        </button>
+    </header>
+
+    <!-- Mensagem de boas-vindas -->
+    <section>
+        <h2>Bem-vindo 👋</h2>
+        <p>Comece o dia gerenciando as consultas.</p>
+    </section>
+    <br>
+
+    <!-- Filtro de médico -->
+    <div class="doctor-selection">
+        <label for="doctor" class="block text-sm font-medium text-white">Filtrar Consultas:</label>
+        <select 
+          id="doctor" 
+          [(ngModel)]="medicoSelecionado" 
+          (change)="buscarClientesPorMedico()" 
+          class="mt-1 block w-1/4 p-3 bg-gray-800 text-white border-none rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        >
+          <option value="" class="text-gray-500">Todas as consultas</option>
+          <option *ngFor="let medico of medicos" [value]="medico">{{ medico }}</option>
+        </select>
+    </div>
+
+    <br>
+    <!-- Tabela de Consultas -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Paciente</th>
+                    <th>Status</th>
+                    <th>Data da Consulta</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientesFiltrados">
+                    <td>
+                        {{ cliente.nome }}
+                        <span *ngIf="cliente.preferencial" class="preferencial-icon">
+                            <i class="fa-solid fa-person-cane"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="status" [ngClass]="{
+                            'status-agendado': cliente.status === 'Agendado',
+                            'status-pendente': cliente.status === 'Pendente',
+                            'status-cancelado': cliente.status === 'Cancelado'
+                        }">{{ cliente.status }}</span>
+                    </td>
+                    <td>
+                        {{ cliente.dataConsulta | date: 'dd/MM/yyyy' }}
+                        <span *ngIf="ConsultaHoje(cliente.dataConsulta)" class="hoje-indicador">
+                            <i class="fa-solid fa-bell sino-alerta" title="Hoje"></i>
+                        </span>
+                    </td>
+                    <td class="actions">
+                        <!-- Botão para abrir painel de ações -->
+                        <button 
+                            class="btn-open-actions" 
+                            (click)="toggleAcoes(cliente)"
+                            title="Ações do Médico"
+                        >
+                            Ações <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    
+                        <!-- Painel de Ações (visível quando o botão é clicado) -->
+                        <div *ngIf="cliente === clienteAcoesAberto" class="painel-acoes">
+                            <a (click)="abrirModalAtestado(cliente)">Gerar Atestado</a>
+                            <a (click)="abrirModalReceita(cliente)">Gerar Receita Médica</a>
+                            <!-- Adicione outras ações conforme necessário -->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- Modal de Receita Medica -->
+    <div *ngIf="modalReceitaAberto" class="modal">
+    <div class="modal-content">
+        <h3 class="header text-2xl font-bold text-white">
+            Gerar Receita para <span class="nome-cliente">{{ clienteSelecionado.nome }}</span>
+        </h3>
+
+        <div class="modal-body">
+            <p><strong>Paciente:</strong> {{ clienteSelecionado.nome }}</p>
+            <p><strong>Data da Consulta:</strong> {{ clienteSelecionado.dataConsulta | date: 'dd/MM/yyyy' }}</p>
+            <p><strong>Médico:</strong> {{ clienteSelecionado.medico }}</p>
+
+            <div *ngFor="let remedio of remedios; let i = index" class="remedio-item">
+                <div class="input-group">
+                    <input 
+                        [(ngModel)]="remedios[i].nome" 
+                        placeholder="Nome do Remédio" 
+                        class="input-remedio"
+                    />
+                    <input 
+                        [(ngModel)]="remedios[i].observacao" 
+                        placeholder="Observação" 
+                        class="input-observacao"
+                    />
+                </div>
+                <button 
+                    (click)="removerRemedio(i)" 
+                    class="button-remover"
+                    title="Remover este remédio"
+                >
+                    ✖
+                </button>
+            </div>
+            
+            <button 
+                (click)="adicionarRemedio()" 
+                class="button-adicionar"
+                title="Adicionar novo remédio"
+            >
+                + Adicionar Remédio
+            </button>
+            
+
+            <textarea [(ngModel)]="textoReceita" rows="6" class="textarea" placeholder="Observações gerais..."></textarea>
+        </div>
+
+        <div class="modal-actions">
+            <button (click)="gerarReceita()">Gerar Receita</button>
+            <button (click)="fecharModalReceita()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal de Atestado -->
+<div *ngIf="modalAtestadoAberto" class="modal">
+    <div class="modal-content">
+        <h3 class="header text-2xl font-bold text-white">
+            Gerar Atestado para <span class="nome-cliente">{{ clienteSelecionado.nome }}</span>
+        </h3>
+
+        <div class="modal-body">
+            <p><strong>Paciente:</strong> {{ clienteSelecionado.nome }}</p>
+            <p><strong>Data da Consulta:</strong> {{ clienteSelecionado.dataConsulta | date: 'dd/MM/yyyy' }}</p>
+            <p><strong>Médico:</strong> {{ clienteSelecionado.medico }}</p>
+
+            <div class="input-group">
+                <label for="dias-repouso" class="label-dias-repouso"><strong>Dias de Repouso:</strong></label>
+                <input 
+                    [(ngModel)]="diasAfastamento" 
+                    id="dias-repouso" 
+                    type="number" 
+                    placeholder="Dias" 
+                    class="input-dias-repouso"
+                />
+            </div>
+
+            <textarea 
+                [(ngModel)]="textoAtestado" 
+                rows="6" 
+                class="textarea" 
+                placeholder="Descreva o motivo do atestado..."
+            ></textarea>
+        </div>
+
+        <div class="modal-actions">
+            <button (click)="gerarAtestado()">Gerar Atestado</button>
+            <button (click)="fecharModalAtestado()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+
+

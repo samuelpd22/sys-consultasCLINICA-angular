@@ -1,0 +1,53 @@
+<div class="formzin flex h-screen">
+  <!-- Formulário à esquerda (50%) -->
+  <div class="w-1/2 flex items-center justify-center formulario p-6">
+    <form class="space-y-6 w-full max-w-md" (ngSubmit)="onLogin()">
+      <h1 class="header text-3xl font-bold text-white">Olá👋</h1>
+      <p class="agende-title">Realize o login para continuar.</p>
+
+      <div class="form-group">
+        <label for="login" class="block text-sm font-medium text-white">Usuário</label>
+        <div class="relative">
+          <input
+            id="login"
+            type="text"
+            [(ngModel)]="login"  
+            name="login"  
+            placeholder="Digite seu nome de usuário"
+            class="mt-1 block w-full p-2 pl-10 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="block text-sm font-medium text-white">Senha</label>
+        <div class="relative">
+          <input
+            id="password"
+            type="password"
+            [(ngModel)]="password"  
+            name="password"  
+            placeholder="Senha"
+            class="mt-1 block w-full p-2 pl-10 bg-gray-800 text-white border-none rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Exibir mensagens de erro ou sucesso -->
+      <div *ngIf="errorMessage" class="text-red-500 text-sm mt-2">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none">
+        Entrar
+      </button>
+    </form>
+  </div>
+
+  <!-- Imagem à direita (50%) -->
+  <div class="w-1/2 flex items-center justify-center bg-gray-100">
+    <img src="https://medigo-three.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fonboarding-img.png&w=1080&q=75" alt="Descrição da imagem" class="object-cover h-full w-full" />
+  </div>
+</div>

@@ -1,0 +1,102 @@
+.principal {
+    background-color: #131619;
+    color: white;
+    display: flex;
+    justify-content: center; /* Alinha horizontalmente ao centro */
+    align-items: center; /* Alinha verticalmente ao centro */
+    height: 100vh; /* Define uma altura para centralizar verticalmente, se necessário */
+  
+}
+
+
+
+
+
+
+
+.flex {
+    display: flex;
+    align-items: center; /* Opcional, para centralizar verticalmente */
+    gap: 1rem; /* Espaço entre os itens */
+    padding-bottom: 20px;
+
+}
+
+.h-screen {
+    height: 100vh;
+}
+
+.max-h-screen {
+    max-height: 100vh;
+}
+
+.px-5 {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.success-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header {
+    font-size: 1.5rem; /* Tamanho da fonte para o cabeçalho */
+    font-weight: bold;
+    margin: 1.5rem 0;
+}
+
+.mb-6 {
+    margin-bottom: 1.5rem; /* Margem inferior */
+}
+
+.max-w-600 {
+    max-width: 600px; /* Largura máxima */
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-green-500 {
+    color: #24AE7C; /* Cor verde */
+}
+
+.request-details {
+    margin-top: 1.5rem; /* Espaçamento acima */
+}
+
+.gap-2 {
+    gap: 0.5rem; /* Espaçamento entre os itens */
+}
+
+.gap-3 {
+    gap: 0.75rem; /* Espaçamento entre os itens */
+}
+
+.whitespace-nowrap {
+    white-space: nowrap; /* Evita quebra de linha */
+}
+
+.shad-primary-btn {
+    background-color: #24AE7C; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Cantos arredondados */
+    padding: 0.5rem 1rem; /* Espaçamento interno */
+    cursor: pointer; /* Cursor de ponteiro */
+    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
+}
+
+.shad-primary-btn:hover {
+    background-color: #1d9b66; /* Cor do botão ao passar o mouse */
+}
+
+.copyright {
+    margin-top: 2rem; /* Espaçamento superior */
+    font-size: 0.875rem; /* Tamanho da fonte */
+    color: rgba(255, 255, 255, 0.6); /* Cor com opacidade */
+}

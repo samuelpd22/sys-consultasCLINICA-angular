@@ -1,0 +1,716 @@
+/* Configurações globais */
+body {
+    background-color: #181a1b;
+    color: #eaeaea;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Cabeçalho */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #242526;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #eaeaea;
+    margin: 0;
+}
+
+header img {
+    width: 130px;
+    height: auto;
+    vertical-align: middle; /* Alinhar verticalmente com o título */
+
+}
+
+header div:last-child {
+    color: #b0b3b8;
+}
+
+/* Mensagem de boas-vindas */
+section h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #eaeaea;
+    margin: 10px 0;
+}
+
+section p {
+    color: #b0b3b8;
+    font-size: 16px;
+}
+
+/* Cards de consultas */
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.card {
+    background: linear-gradient(135deg, #3b3b3b, #19191aa8); /* Degradê do roxo para azul claro */
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom:20px ;
+    margin-top: 20px;
+}
+
+.card i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.card h2 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.card p {
+    font-size: 1rem;
+    margin: 5px 0 0;
+}
+
+
+/* Cores dos ícones dos cards */
+.card:nth-child(1) i {
+    color: #15ac15e0; /* Cor do ícone no segundo card */
+
+}
+.card:nth-child(2) i {
+    color: #00aaffb6; /* Cor do ícone no segundo card */
+}
+
+.card:nth-child(3) i {
+    color: #ff4d4ddc; /* Cor do ícone no terceiro card */
+}
+
+/* Tabela de consultas */
+.table-container {
+    background-color: #242526;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #eaeaea;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #3a3b3c;
+}
+
+th {
+    background-color: #3a3b3c;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #3a3b3c;
+}
+
+tr:nth-child(even) {
+    background-color: #2a2b2c;
+}
+
+/* Status */
+.status {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.status-cancelado {
+    background-color:rgba(255, 0, 0, 0.301) ;
+    color: rgba(238, 48, 48, 0.87);
+}
+.status-agendado {
+    background-color:#4caf4f5d ;
+    color: #17921d;
+}
+.status-pendente {
+    background-color: #0d86c36e;
+    color:#0d86c3;
+}
+  
+
+/* Links de ação */
+.actions a {
+    color: #4caf50;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0 5px;
+}
+
+.actions a.cancelar {
+    color: #f44336;
+}
+
+/* Ícones */
+.icon {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+    }
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: #131619;
+    padding: 20px;
+    border-radius: 10px;
+    width: 600px;
+    height: auto;
+    max-height: 90vh; /* Limita a altura máxima para que o modal não ocupe toda a tela */
+    overflow-y: auto;
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem; /* Espaçamento entre os grupos de formulário */
+  }
+  
+  .input-field, .input {
+    background-color: rgba(33, 33, 34, 0.801);
+    border: 1px solid rgb(51, 50, 50);
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    outline: none;
+    width: 100%;
+  }
+  
+  .input-field::placeholder {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .button {
+    background-color: #24AE7C; /* Cor do botão */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 48%; /* Tamanho para os dois botões ficarem na mesma linha */
+  }
+  
+  .button:hover {
+    background-color: #1d9b66; /* Cor do botão ao passar o mouse */
+  }
+  
+  .cancel-btn {
+    background-color: #e74c3c; /* Cor do botão de cancelar */
+  }
+  
+  .cancel-btn:hover {
+    background-color: #c0392b; /* Cor do botão de cancelar ao passar o mouse */
+  }
+  .nome-cliente {
+    color: #41C282; /* Altere a cor conforme necessário */
+  }
+
+
+
+
+
+  // icone de dados gerais
+
+  i{
+    padding-top: 20px;
+    color: #ffffffb4;
+  }
+
+.modal-details{
+    color: rgba(255, 255, 255, 0.788);
+    p{
+        padding: 10px 10px;
+    }
+}
+
+
+
+
+.generate-atestado {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.generate-atestado:hover {
+    text-decoration: underline;
+}
+
+
+/* Configurações globais */
+body {
+    background-color: #181a1b;
+    color: #eaeaea;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Escurecimento mais forte */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: white;
+}
+
+.modal-content {
+    background-color: #1f2324; /* Fundo do modal mais suave */
+    padding: 30px;
+    border-radius: 10px;
+    width: 70%;
+    max-width: 800px;
+    height: auto;
+    max-height: 90vh; /* Limita a altura máxima para que o modal não ocupe toda a tela */
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); /* Sombra mais suave */
+    animation: slideIn 0.3s ease-out; /* Animação de entrada */
+}
+
+/* Animação de slide-in para o conteúdo */
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+.header {
+    margin-bottom: 25px;
+    font-size: 1.6rem;
+    color: #eaeaea;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nome-cliente {
+    color: #41C282; /* Cor personalizada para o nome do cliente */
+}
+
+/* Formulário no modal */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Campo de entrada */
+.input-field {
+    background-color: rgba(33, 33, 34, 0.9);
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #eaeaea;
+    padding: 12px;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.input-field::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Botões */
+.button {
+    background-color: #24AE7C;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 48%;
+    font-size: 1rem;
+    text-align: center;
+    display: inline-block;
+}
+
+.button:hover {
+    background-color: #1d9b66;
+}
+
+/* Botão cancelar */
+.cancel-btn {
+    background-color: #e74c3c;
+}
+
+.cancel-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Modal Details */
+.modal-details {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+}
+
+.modal-details p {
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #b0b3b8;
+}
+
+/* Estilo do texto do atestado */
+.textarea {
+    width: 100%;
+    background-color: rgba(33, 33, 34, 0.9);
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 1rem;
+    color: white;
+    resize: vertical;
+    min-height: 150px;
+    margin-top: 15px;
+}
+
+/* Estilos dos links */
+.generate-atestado {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.generate-atestado:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%; /* Maior largura em telas pequenas */
+    }
+    
+    .button {
+        width: 100%; /* Botões ficam em largura total nas telas pequenas */
+    }
+}
+/* Botões dentro do Modal */
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px; /* Espaçamento entre os botões */
+}
+
+/* Estilos para o botão "Gerar Atestado" */
+.modal-actions button:first-child {
+    background-color: #4CAF50; /* Verde para 'Gerar Atestado' */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 48%;
+    transition: all 0.3s ease;
+}
+
+.modal-actions button:first-child:hover {
+    background-color: #45a049; /* Cor de hover para 'Gerar Atestado' */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar efeito de destaque */
+}
+
+/* Estilos para o botão "Cancelar" */
+.modal-actions button:last-child {
+    background-color: #e74c3c; /* Vermelho para 'Cancelar' */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 48%;
+    transition: all 0.3s ease;
+}
+
+.modal-actions button:last-child:hover {
+    background-color: #c0392b; /* Cor de hover para 'Cancelar' */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar efeito de destaque */
+}
+
+/* Foco nos botões */
+.modal-actions button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(75, 158, 72, 0.6); /* Destaque de foco em verde para 'Gerar Atestado' */
+}
+
+.modal-actions button.cancel-btn:focus {
+    box-shadow: 0 0 5px rgba(231, 76, 60, 0.6); /* Destaque de foco em vermelho para 'Cancelar' */
+}
+
+
+strong{
+    color:#41C282;
+}
+
+.preferencial-icon {
+    background-color: rgba(235, 232, 232, 0);
+    color: rgb(53, 52, 51);
+    padding: 0px 0px;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-left: 8px;
+    font-size: 16px;
+}
+
+
+.hoje-indicador {
+    color: rgb(139, 139, 139); /* Cor da bolinha */
+    font-size: 14px; /* Tamanho da bolinha */
+    margin-left: 8px; /* Espaço entre a data e a bolinha */
+}
+
+
+.sino-alerta {
+    color: rgba(227, 234, 235, 0.479); /* Cor do sino */
+    font-size: 16px; /* Tamanho do sino */
+    transition: transform 0.2s ease-in-out; /* Suavidade na animação */
+    cursor: pointer; /* Cursor de interatividade */
+  }
+  
+.sino-alerta:hover {
+    color: rgb(189, 186, 186); /* Mudar cor ao passar o mouse */
+    transform: rotate(-15deg) translateX(2px) scale(1.1); /* Leve rotação e aumento */
+    animation: tremer 0.5s ease-in-out infinite; /* Aplicar o efeito de tremer */
+}
+  
+  /* Animação de tremer */
+@keyframes tremer {
+    0% { transform: rotate(0); }
+    25% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+    100% { transform: rotate(0); }
+}
+
+
+
+
+
+
+
+
+
+.remedio-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.remedio-item:hover {
+    background-color: #f0f8ff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+}
+
+.input-remedio, .input-observacao {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-remedio:focus, .input-observacao:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+.button-remover {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-remover:hover {
+    background-color: #c0392b;
+    transform: scale(1.1);
+}
+
+.button-adicionar {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 20px;
+    background-color: #27ae60;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-adicionar:hover {
+    background-color: #2ecc71;
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+//modal atestado
+
+/* Estilização do label */
+.label-dias-repouso {
+    font-size: 1.1rem; /* Aumentando levemente o tamanho para destaque */
+    font-weight: 600; /* Um pouco mais marcante que bold */
+    color: #2c3e50; /* Tom escuro sofisticado */
+    margin-bottom: 4px; /* Espaçamento entre o label e o input */
+    letter-spacing: 0.5px; /* Suave espaçamento entre letras */
+}
+
+/* Estilização do input */
+.input-dias-repouso {
+    padding: 2px 12px; /* Ajuste de espaçamento interno */
+    border: 1.5px solid #bdc3c7; /* Borda mais sutil */
+    border-radius: 8px; /* Arredondamento mais visível */
+    font-size: 1rem;
+    color: #34495e; /* Texto em tom mais escuro */
+    background-color: #fdfefe; /* Fundo quase branco */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Leve profundidade interna */
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s; /* Animação suave */
+}
+
+/* Efeitos ao focar no campo */
+.input-dias-repouso:focus {
+    border-color: #1abc9c; /* Verde vibrante para foco */
+    background-color: #ecf9f5; /* Fundo sutilmente esverdeado no foco */
+    box-shadow: 0 0 8px rgba(26, 188, 156, 0.4); /* Realce com sombra */
+    outline: none;
+}
+
+/* Placeholder estilizado */
+.input-dias-repouso::placeholder {
+    color: #95a5a6; /* Tom suave de cinza */
+    font-style: italic; /* Estilo discreto */
+    font-size: 0.95rem; /* Levemente menor que o texto */
+}
+
+
+//ação de outros botoes e funcoes
+.painel-acoes {
+    background-color:#131619;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Ajuste para não interferir no layout */
+    z-index: 1000;
+}
+
+.btn-open-actions {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-open-actions i {
+    margin-left: 5px;
+}
+
+.painel-acoes a {
+    display: block;
+    padding: 5px 0;
+    color: #a5c1d4;
+    cursor: pointer;
+}
+
+.painel-acoes a:hover {
+    color: #1d6fa5;
+}
