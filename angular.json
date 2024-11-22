@@ -45,16 +45,26 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "5mb",
-                  "maximumError": "6mb"
+                  "maximumWarning": "2mb", 
+                  "maximumError": "3mb"
+                },
+                {
+                  "type": "lazy",
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "30kb",
-                  "maximumError": "40kb"
+                  "maximumWarning": "50kb",
+                  "maximumError": "100kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true,
+              "buildOptimizer": true,
+              "sourceMap": false,
+              "extractCss": true,
+              "aot": true
             },
             "development": {
               "optimization": false,

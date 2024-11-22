@@ -5,7 +5,9 @@ import { SucessoComponent } from './components/sucesso/sucesso.component';
 import { PainelComponent } from './components/painel/painel.component';
 import { MedicovisaoComponent } from './components/medicovisao/medicovisao.component';
 
-export const routes: Routes = [{
+export const routes: Routes = [
+
+{
     path:"registrar", component:RegistrarComponent,
 },
 {
