@@ -34,10 +34,6 @@
             ],
             "scripts": [
               "node_modules/chart.js/dist/chart.js"
-            ],
-            "allowedCommonJsDependencies": [
-              "jspdf",
-              "dompurify"
             ]
           },
           "configurations": {
@@ -45,26 +41,16 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb", 
-                  "maximumError": "3mb"
-                },
-                {
-                  "type": "lazy",
-                  "maximumWarning": "1mb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "50kb",
-                  "maximumError": "100kb"
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all",
-              "optimization": true,
-              "buildOptimizer": true,
-              "sourceMap": false,
-              "extractCss": true,
-              "aot": true
+              "outputHashing": "all"
             },
             "development": {
               "optimization": false,
