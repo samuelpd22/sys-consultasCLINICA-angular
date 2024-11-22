@@ -7,7 +7,8 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 export class AxiosService {
 
   constructor() {
-    axios.defaults.baseURL = 'http://localhost:8080';
+    //axios.defaults.baseURL = 'http://localhost:8080';
+    axios.defaults.baseURL = 'https://disciplined-perception-production.up.railway.app';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
   }
 

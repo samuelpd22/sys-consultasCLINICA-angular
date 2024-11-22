@@ -13,8 +13,8 @@ export class ClienteService {
 
   http = inject(HttpClient);
   storage = inject(StorageService); // Injetar o serviço de armazenamento
-  API = "http://localhost:8080/cad"
-
+  //API = "http://localhost:8080/cad"
+  API = "https://disciplined-perception-production.up.railway.app/cad"
 
 
   constructor() { }
